@@ -4,7 +4,12 @@
 
 const fs = require('fs');
 
-fs.watch('target.txt', () => console.log('File changed!'));
+const filename = process.argv[2];
+if (!filename) {
+    throw Error('A file to watch must be specified');
+}
 
-console.log('Now watching target.txt for changes....');
+fs.watch(filename, () => console.log(`File ${filename} has changed!`));
+
+console.log(`Now watching ${filename} for changes....`);
 
